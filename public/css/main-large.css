@@ -1,0 +1,37 @@
+@media only screen and (min-width: 40rem) {
+
+    main,
+    nav,
+    footer {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    main {
+        padding: 2rem 1.5rem 2.5rem;
+    }
+
+    nav {
+        border-bottom: var(--border-color) 1px solid;
+    }
+
+    nav ul {
+        display: flex;
+        align-items: center;
+    }
+
+    nav a {
+        border-bottom: none;
+        padding: 1rem 1.2rem;
+    }
+
+    .main-logo {
+        max-width: 320px;
+        margin-top: 1.5rem;
+    }
+
+    main ul {
+        display: grid;
+        gap: 0.6rem;
+    }
+}
