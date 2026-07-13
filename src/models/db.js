@@ -13,7 +13,9 @@ import { Pool } from 'pg';
  */
 const pool = new Pool({
     connectionString: process.env.DB_URL,
-    ssl: true
+    ssl: {
+        rejectUnauthorized: false // set true if not using self‑signed certificates
+    }
 });
 
 /**
