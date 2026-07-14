@@ -30,7 +30,7 @@ VALUES
     'unityserve-logo.png'
   );
 
-  SELECT * FROM organization;
+SELECT * FROM organization;
 
 -- Service Project Table -----------
 -- ----------------------------------
@@ -153,4 +153,87 @@ VALUES
     '2026-09-10'
   );
 
-  SELECT * FROM service_project;
+SELECT * FROM service_project;
+
+-- Categories Table -----------------
+-- ----------------------------------
+
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    category_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+INSERT INTO category (category_name)
+VALUES
+    ('Infrastructure'),
+    ('Education'),
+    ('Sustainability'),
+    ('Youth Services'),
+    ('Senior Support'),
+    ('Food Security'),
+    ('Accessibility'),
+    ('Community Outreach'),
+    ('Technology');
+
+SELECT * FROM category;
+
+-- Project Categories Table ---------
+-- ----------------------------------
+
+CREATE TABLE project_category (
+    service_project_id INTEGER NOT NULL,
+    category_id INTEGER NOT NULL,
+    PRIMARY KEY (service_project_id, category_id),
+    FOREIGN KEY (service_project_id) REFERENCES service_project(service_project_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE
+);
+
+INSERT INTO project_category (service_project_id, category_id)
+VALUES
+    -- Community Playground Renovation -> Infrastructure, Community Outreach
+    (1, 1),
+    (1, 8),
+    -- School Roof Repair and Reinforcement -> Infrastructure, Education
+    (2, 1),
+    (2, 2),
+    -- Bridge Restoration Project -> Infrastructure, Community Outreach
+    (3, 1),
+    (3, 8),
+    -- Community Center Accessibility Upgrade -> Infrastructure, Accessibility
+    (4, 1),
+    (4, 7),
+    -- Library Renovation and Technology Integration -> Education, Technology
+    (5, 2),
+    (5, 9),
+    -- Urban Garden Initiative -> Sustainability, Infrastructure
+    (6, 3),
+    (6, 1),
+    -- School Garden and Nutrition Education -> Sustainability, Education
+    (7, 3),
+    (7, 2),
+    -- Rooftop Farming Initiative -> Sustainability, Infrastructure
+    (8, 3),
+    (8, 1),
+    -- Community Seed Bank and Composting Center -> Sustainability, Food Security
+    (9, 3),
+    (9, 6),
+    -- Neighborhood Composting Education Program -> Sustainability, Community Outreach
+    (10, 3),
+    (10, 8),
+    -- Seniors Support Program -> Senior Support, Community Outreach
+    (11, 5),
+    (11, 8),
+    -- Youth Mentorship Initiative -> Youth Services, Education
+    (12, 4),
+    (12, 2),
+    -- Community Food Bank Support -> Food Security, Community Outreach
+    (13, 6),
+    (13, 8),
+    -- Homeless Shelter Assistance Program -> Food Security, Community Outreach
+    (14, 6),
+    (14, 8),
+    -- Senior Technology Training Classes -> Senior Support, Technology
+    (15, 5),
+    (15, 9);
+
+SELECT * FROM project_category;

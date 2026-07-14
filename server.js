@@ -5,6 +5,7 @@ import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
 import { getOrganizationCount } from './src/models/organizations.js';
 import { getAllProjects } from './src/models/projects.js';
+import { getAllCategories } from './src/models/categories.js';
 
 
 // Define the application environment
@@ -58,8 +59,10 @@ app.get('/projects', async (req, res) => {
 });
 
 app.get('/categories', async (req, res) => {
+    const categories = await getAllCategories();
     const title = 'Categories';
-    res.render('categories', { title });
+
+    res.render('categories', { title, categories });
 });
 
 app.listen(PORT, async () => {
