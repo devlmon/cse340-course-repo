@@ -13,13 +13,8 @@ const getAllOrganizations = async () => {
 
 const getOrganizationDetails = async (organizationId) => {
       const query = `
-      SELECT
-        organization_id,
-        name,
-        description,
-        contact_email,
-        logo_filename
-      FROM organization
+      SELECT organization_id, name, description, contact_email, logo_filename
+      FROM public.organization
       WHERE organization_id = $1;
     `;
 
@@ -30,16 +25,5 @@ const getOrganizationDetails = async (organizationId) => {
       return result.rows.length > 0 ? result.rows[0] : null;
 };
 
-const getOrganizationCount = async () => {
-    const query = `
-        SELECT COUNT(*) as count
-        FROM public.organization;
-    `;
-
-    const result = await db.query(query);
-
-    return result.rows[0].count;
-}
-
 // Export the model functions
-export { getAllOrganizations, getOrganizationDetails, getOrganizationCount };
+export { getAllOrganizations, getOrganizationDetails };
